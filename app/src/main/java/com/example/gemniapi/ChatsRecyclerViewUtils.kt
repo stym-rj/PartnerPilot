@@ -53,6 +53,7 @@ class ChatAdapter (
     override fun getItemCount() = listOfChats.size
 
     override fun onBindViewHolder(holder: ChatsViewHolder, position: Int) {
+        holder.setIsRecyclable(false)
         holder.bind(listOfChats[position])
     }
 

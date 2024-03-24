@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnSend.setOnClickListener {
             val prompt = binding.tietPrompt.text
             val promptText: String = prompt.toString()
-            Log.d("MYAPP", "Prompt details : ${promptText}")
+            Log.d("MYAPP", "Prompt details : $promptText")
 
             if (promptText.isNullOrBlank()) {
                 Toast.makeText(this@MainActivity, "Please enter a prompt!", Toast.LENGTH_LONG).show()
