@@ -2,6 +2,7 @@ package com.example.gemniapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +13,8 @@ import com.example.gemniapi.database.ChatMessage
 import com.example.gemniapi.database.ChatMessagesDatabase
 import com.example.gemniapi.databinding.ActivityMainBinding
 import com.google.ai.client.generativeai.GenerativeModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.concurrent.thread
 
@@ -54,7 +57,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnSend.setOnClickListener {
             val prompt = binding.tietPrompt.text
-            if (prompt.isNullOrBlank()) {
+            val promptText: String = prompt.toString()
+            Log.d("MYAPP", "Prompt details : ${promptText}")
+
+            if (promptText.isNullOrBlank()) {
                 Toast.makeText(this@MainActivity, "Please enter a prompt!", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
@@ -64,9 +70,10 @@ class MainActivity : AppCompatActivity() {
                     var chat = ChatMessage(text = prompt.toString(), sender = "Me", timeStamp = System.currentTimeMillis())
                     database.chatMessagesDao().insert(chat)
                     adapter.addData(chat)
-                    binding.tietPrompt.text?.clear()
+                    binding.tietPrompt.text!!.clear()
 
-                    val response = generativeModel.generateContent(prompt.toString())
+                    val response = generativeModel.generateContent(promptText)
+
                     chat = ChatMessage(text = response.text.toString(), sender = "Gemini", timeStamp = System.currentTimeMillis())
                     database.chatMessagesDao().insert(chat)
                     adapter.addData(chat)
