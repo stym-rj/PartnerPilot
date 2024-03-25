@@ -17,6 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="16sp"
-        android:textColor="@color/white"
+        android:textColor="?android:attr/textColorPrimary"
         android:padding="8dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,12 +20,12 @@ class ChatsViewHolder (
         set.clone(layout)
         if (chat.sender == "Me") {
             layoutParams.setMargins(250, 25, 50, 25)
-            binding.tvChat.setBackgroundResource(R.drawable.rounded_green_background)
+            binding.tvChat.setBackgroundResource(R.drawable.rounded_me_background)
             set.clear(binding.tvChat.id, ConstraintSet.START)
             set.applyTo(layout)
         } else {
             layoutParams.setMargins(50, 25, 250, 25)
-            binding.clChat.setBackgroundResource(R.drawable.rounded_blue_background)
+            binding.clChat.setBackgroundResource(R.drawable.rounded_gemini_background)
             set.clear(binding.tvChat.id, ConstraintSet.END)
             set.applyTo(layout)
         }
